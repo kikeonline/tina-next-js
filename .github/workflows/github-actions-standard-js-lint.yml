@@ -1,0 +1,16 @@
+name: Standard JS Linting
+on:
+  # Triggers the workflow on push or pull request events but only for the develop branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn
+      - uses: goto-bus-stop/standard-action@v1
+        with:
+          files: '{components/**/*.js,pages/**/*.js}'
