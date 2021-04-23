@@ -9,6 +9,15 @@ The blog posts are stored in `/_posts` as Markdown files with front matter suppo
 
 This example project uses Next.js' [blog starter](https://next-blog-starter.now.sh/) and adds Tina to it according to the [Tina boostrapping guide](https://tinacms.org/guides/nextjs/adding-tina/overview).
 
+## How to use
+
+Install dependencies and run the example:
+
+```bash
+yarn install
+yarn dev
+```
+
 ## Deploy your own
 
 Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
