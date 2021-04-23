@@ -1,4 +1,5 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![Standard JS Linting](https://github.com/kikeonline/tina-next-js/actions/workflows/github-actions-standard-js-lint.yml/badge.svg?branch=main)](https://github.com/kikeonline/tina-next-js/actions/workflows/github-actions-standard-js-lint.yml)
 
 
 # Next.js static blog starter + TinaCMS (..and Strapi)
