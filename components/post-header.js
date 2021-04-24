@@ -3,10 +3,15 @@ import DateFormatter from '../components/date-formatter'
 import CoverImage from '../components/cover-image'
 import PostTitle from '../components/post-title'
 
-export default function PostHeader ({ title, coverImage, date, author }) {
+export default function PostHeader ({ title, coverImage, date, author, excerpt }) {
   return (
     <>
       <PostTitle>{title}</PostTitle>
+      <div className='hidden excerpt'>
+        <p>
+          {excerpt}
+        </p>
+      </div>
       <div className='hidden md:block md:mb-12'>
         <Avatar name={author.name} picture={author.picture} />
       </div>

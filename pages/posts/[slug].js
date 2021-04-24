@@ -11,9 +11,15 @@ import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 // import markdownToHtml from '../../lib/markdownToHtml'
 // import { useState, useEffect, useMemo } from 'react'
-import { useForm, usePlugin } from 'tinacms'
+// TINA IMPORTS
+import { useCMS, useForm, usePlugin } from 'tinacms'
+import { DateFieldPlugin } from 'react-tinacms-date'
 
 export default function Post ({ post: initialPost, morePosts, preview }) {
+  // console.log('Post: ', initialPost)
+
+  const cms = useCMS()
+  cms.plugins.add(DateFieldPlugin)
   const formConfig = {
     id: initialPost.slug, // a unique identifier for this instance of the form
     label: 'Blog Post', // name of the form to appear in the sidebar
@@ -21,6 +27,8 @@ export default function Post ({ post: initialPost, morePosts, preview }) {
     onSubmit: values => {
       // do something with the data when the form is submitted
       // alert(`Submitting ${values.title}`)
+      console.log(values)
+      cms.alerts.success('Page saved successfully.')
     },
     fields: [
       // define fields to appear in the form
@@ -30,9 +38,31 @@ export default function Post ({ post: initialPost, morePosts, preview }) {
         component: 'text' // the component used to handle UI and input to the field
       },
       {
+        name: 'author.name',
+        label: 'Author',
+        component: 'text'
+      },
+      {
+        name: 'coverImage',
+        label: 'Cover Image',
+        component: 'image'
+      },
+      {
+        name: 'date',
+        label: 'Date',
+        component: 'date',
+        // dateFormat: 'MMMM DD YYYY',
+        timeFormat: false
+      },
+      {
         name: 'content', // as mentioned in project setup, `post.content` will refer to the raw markdown.
         label: 'Content',
         component: 'markdown' // `component` accepts a predefined components or a custom React component
+      },
+      {
+        name: 'excerpt',
+        label: 'Excerpt',
+        component: 'textarea'
       }
     ]
   }
@@ -65,6 +95,7 @@ export default function Post ({ post: initialPost, morePosts, preview }) {
                   coverImage={post.coverImage}
                   date={post.date}
                   author={post.author}
+                  excerpt={post.excerpt}
                 />
                 <PostBody content={post.content} />
               </article>
@@ -83,7 +114,8 @@ export async function getStaticProps ({ params }) {
     'author',
     'content',
     'ogImage',
-    'coverImage'
+    'coverImage',
+    'excerpt'
   ])
   // const content = await markdownToHtml(post.content || '')
 
