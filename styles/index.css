@@ -13,3 +13,15 @@
 /* Stop purging. */
 
 /* Your own custom utilities */
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.90rem;
+}
+
+h3 {
+  font-size: 1.3rem;
+}
