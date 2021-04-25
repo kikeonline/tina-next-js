@@ -2,11 +2,18 @@ import Link from 'next/link'
 
 export default function Header () {
   return (
-    <h2 className='text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 mt-8'>
-      <Link href='/'>
-        <a className='hover:underline'>Blog</a>
-      </Link>
-      .
-    </h2>
+    <section className='flex flex-row justify-between items-center md:flex-row mt-16 mb-16 md:mb-12'>
+      <h1 className='text-6xl md:text-8xl font-bold tracking-tighter leading-tight md:pr-8'>
+        <Link href='/'>
+          <a className='hover:underline'>NextJS</a>
+        </Link>
+      </h1>
+
+      <nav>
+        <Link href='/about-us'>
+          <a className='hover:underline'>About Us</a>
+        </Link>
+      </nav>
+    </section>
   )
 }
