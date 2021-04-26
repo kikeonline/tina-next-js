@@ -16,10 +16,9 @@ import { useCMS, useForm, usePlugin } from 'tinacms'
 import { DateFieldPlugin } from 'react-tinacms-date'
 
 export default function Post ({ post: initialPost, morePosts, preview }) {
-  // console.log('Post: ', initialPost)
+  cms.plugins.add(DateFieldPlugin)
 
   const cms = useCMS()
-  cms.plugins.add(DateFieldPlugin)
   const formConfig = {
     id: initialPost.slug, // a unique identifier for this instance of the form
     label: 'Blog Post', // name of the form to appear in the sidebar

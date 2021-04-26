@@ -8,12 +8,38 @@ import PostBody from '../components/post-body'
 // import axios from 'axios'
 import { getPageBySlug } from '../lib/api'
 
-export default function Index ({ aboutUsPage }) {
+// TINA IMPORTS
+import { useCMS, useForm, usePlugin } from 'tinacms'
+
+export default function AboutUsPage ({ aboutUsPage }) {
+  console.log({ aboutUsPage })
+  const cms = useCMS()
+  const formConfig = {
+    id: aboutUsPage.slug, // a unique identifier for this instance of the form
+    label: 'Blog Post', // name of the form to appear in the sidebar
+    initialValues: aboutUsPage, // populate the form with starting values
+    onSubmit: values => {
+      // do something with the data when the form is submitted
+      // alert(`Submitting ${values.title}`)
+      console.log(values)
+      cms.alerts.success('Page saved successfully.')
+    },
+    fields: [
+      // define fields to appear in the form
+      {
+        name: 'title', // field name maps to the corresponding key in initialValues
+        label: 'Page title', // label that appears above the field
+        component: 'text' // the component used to handle UI and input to the field
+      }
+    ]
+  }
+  const [title, form] = useForm(formConfig)
+  usePlugin(form)
   return (
     <>
       <Layout>
         <Head>
-          <title>Next.js | About Us</title>
+          <title>Next.js | {aboutUsPage.title}</title>
         </Head>
         <Container>
           <Header />
@@ -41,7 +67,7 @@ export async function getStaticProps () {
     'excerpt',
     'content'
   ])
-  console.log(aboutUsPage)
+  // console.log(aboutUsPage)
   return {
     props: { aboutUsPage }
   }
