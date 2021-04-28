@@ -5,12 +5,14 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint": "yarn standard \"components/**/*.js\" \"pages/**/*.js\""
+    "lint": "yarn standard \"components/**/*.js\" \"pages/**/*.js\"",
+    "lint:fix": "yarn standard --fix \"components/**/*.js\" \"pages/**/*.js\""
   },
   "dependencies": {
     "axios": "^0.21.1",
     "classnames": "2.2.6",
     "date-fns": "2.16.1",
+    "dotenv": "^8.2.0",
     "gray-matter": "4.0.2",
     "next": "latest",
     "react": "^17.0.1",
@@ -19,6 +21,7 @@
     "react-tinacms-date": "^0.40.0",
     "react-tinacms-editor": "^0.40.0",
     "react-tinacms-inline": "^0.40.0",
+    "react-tinacms-strapi": "^0.40.0",
     "remark": "13.0.0",
     "remark-html": "13.0.1",
     "standard": "^16.0.3",
