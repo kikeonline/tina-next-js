@@ -1,10 +1,7 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Standard JS Linting](https://github.com/kikeonline/tina-next-js/actions/workflows/github-actions-standard-js-lint.yml/badge.svg?branch=main)](https://github.com/kikeonline/tina-next-js/actions/workflows/github-actions-standard-js-lint.yml)
 
-
-# Next.js + TinaCMS (..and soon Strapi)
-
-This example project uses Next.js' [blog starter](https://next-blog-starter.now.sh/) and adds Tina to it according to the [Tina boostrapping guide](https://tinacms.org/guides/nextjs/adding-tina/overview).
+# Next.js + TinaCMS + StrapiCMS
 
 ## How to use
 
@@ -24,3 +21,8 @@ https://hub.docker.com/r/strapi/strapi/dockerfile
 # Tailwind CSS
 
 This blog-starter uses [Tailwind CSS](https://tailwindcss.com). To control the generated stylesheet's filesize, this example uses Tailwind CSS' v2.0 [`purge` option](https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css) to remove unused CSS.
+
+# TODO: 
+
+- Fix date | Shows wrong date when date picker updates
+- Manage About Us Page content in Strapi
