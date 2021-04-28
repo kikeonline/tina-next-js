@@ -12,7 +12,6 @@ import { getPageBySlug } from '../lib/api'
 import { useCMS, useForm, usePlugin } from 'tinacms'
 
 export default function AboutUsPage ({ aboutUsPage }) {
-  console.log({ aboutUsPage })
   const cms = useCMS()
   const formConfig = {
     id: aboutUsPage.slug, // a unique identifier for this instance of the form
@@ -21,7 +20,6 @@ export default function AboutUsPage ({ aboutUsPage }) {
     onSubmit: values => {
       // do something with the data when the form is submitted
       // alert(`Submitting ${values.title}`)
-      console.log(values)
       cms.alerts.success('Page saved successfully.')
     },
     fields: [
@@ -43,9 +41,6 @@ export default function AboutUsPage ({ aboutUsPage }) {
         </Head>
         <Container>
           <Header />
-          {/* <PostTitle>
-            About Us
-          </PostTitle> */}
         </Container>
         <Hero
           title='About Us'
@@ -67,7 +62,7 @@ export async function getStaticProps () {
     'excerpt',
     'content'
   ])
-  // console.log(aboutUsPage)
+
   return {
     props: { aboutUsPage }
   }

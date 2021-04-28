@@ -5,17 +5,17 @@ import PostBody from '../../components/post-body'
 import Header from '../../components/header'
 import PostHeader from '../../components/post-header'
 import Layout from '../../components/layout'
-import { getPostBySlug, getAllPosts } from '../../lib/api'
 import PostTitle from '../../components/post-title'
 import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 // import markdownToHtml from '../../lib/markdownToHtml'
-// import { useState, useEffect, useMemo } from 'react'
 // TINA IMPORTS
 import { useCMS, useForm, usePlugin } from 'tinacms'
 import { DateFieldPlugin } from 'react-tinacms-date'
+// STRAPI
+import { fetchGraphql } from 'react-tinacms-strapi'
 
-export default function Post ({ post: initialPost, morePosts, preview }) {
+export default function Post ({ post: initialPost, preview }) {
   const cms = useCMS()
   cms.plugins.add(DateFieldPlugin)
 
@@ -23,11 +23,43 @@ export default function Post ({ post: initialPost, morePosts, preview }) {
     id: initialPost.slug, // a unique identifier for this instance of the form
     label: 'Blog Post', // name of the form to appear in the sidebar
     initialValues: initialPost, // populate the form with starting values
-    onSubmit: values => {
-      // do something with the data when the form is submitted
-      // alert(`Submitting ${values.title}`)
-      console.log(values)
-      cms.alerts.success('Page saved successfully.')
+    onSubmit: async (values) => {
+      const saveMutation = `
+      mutation UpdatePost(
+        $id: ID!
+        $title: String
+        $date: Date
+        $content: String
+        $coverImageId: ID
+      ) {
+        updatePost(
+          input: {
+            where: { id: $id }
+            data: { title: $title, date: $date, content: $content, coverImage: $coverImageId}
+          }
+        ) {
+          post {
+            id
+            date
+          }
+        }
+      }`
+      // STRAPI DATE TEMPORAL FIX TODO: FIX TIMEZONE backend-side
+      const dateChosen = new Date(values.date)
+      const day = 60 * 60 * 24 * 1000
+      const fixedDate = new Date(dateChosen.getTime() + (day * 2)).toISOString().split('T')[0]
+      const response = await cms.api.strapi.fetchGraphql(saveMutation, {
+        id: values.id,
+        title: values.title,
+        date: fixedDate,
+        content: values.content,
+        coverImageId: values.coverImage.id
+      })
+      if (response.data) {
+        cms.alerts.success('Changes Saved')
+      } else {
+        cms.alerts.error('Error saving changes')
+      }
     },
     fields: [
       // define fields to appear in the form
@@ -87,11 +119,11 @@ export default function Post ({ post: initialPost, morePosts, preview }) {
                   <title>
                     {post.title} | Next.js Blog Example with {CMS_NAME}
                   </title>
-                  <meta property='og:image' content={post.ogImage.url} />
+                  <meta property='og:image' content={process.env.STRAPI_URL + post.coverImage.url} />
                 </Head>
                 <PostHeader
                   title={post.title}
-                  coverImage={post.coverImage}
+                  coverImage={process.env.STRAPI_URL + post.coverImage.url}
                   date={post.date}
                   author={post.author}
                   excerpt={post.excerpt}
@@ -105,35 +137,67 @@ export default function Post ({ post: initialPost, morePosts, preview }) {
   )
 }
 
-export async function getStaticProps ({ params }) {
-  const post = getPostBySlug(params.slug, [
-    'title',
-    'date',
-    'slug',
-    'author',
-    'content',
-    'ogImage',
-    'coverImage',
-    'excerpt'
-  ])
-  // const content = await markdownToHtml(post.content || '')
-
+export async function getStaticProps ({ params, preview, previewData }) {
+  const postResults = await fetchGraphql(
+    process.env.STRAPI_URL,
+    `
+    query{
+      posts(where: {slug: "${params.slug}"}){
+        id
+        title
+        date
+        slug
+        content
+        author {
+          name
+          picture { 
+            url
+          }
+        }
+        coverImage {
+          url
+        }
+      }
+    }
+  `
+  )
+  const post = postResults.data.posts[0]
+  if (preview) {
+    return {
+      props: {
+        post: {
+          ...post
+        },
+        preview,
+        ...previewData
+      }
+    }
+  }
   return {
     props: {
-      // post: {
-      //   ...post,
-      //   content,
-      // },
-      post
-    }
+      post: {
+        ...post
+      },
+      preview: false
+    },
+    revalidate: 1
   }
 }
 
 export async function getStaticPaths () {
-  const posts = getAllPosts(['slug'])
+  const postResults = await fetchGraphql(
+    process.env.STRAPI_URL,
+    `
+    query{
+      posts{
+        slug
+      }
+    }
+  `
+  )
 
   return {
-    paths: posts.map(post => {
+    paths: postResults.data.posts.map(post => {
       return {
         params: {
           slug: post.slug
