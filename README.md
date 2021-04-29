@@ -1,5 +1,4 @@
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-[![Standard JS Linting](https://github.com/kikeonline/tina-next-js/actions/workflows/github-actions-standard-js-lint.yml/badge.svg?branch=main)](https://github.com/kikeonline/tina-next-js/actions/workflows/github-actions-standard-js-lint.yml)
+[![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 
 # Next.js + TinaCMS + StrapiCMS
 
@@ -11,18 +10,17 @@ Install dependencies and run the example:
 yarn install
 yarn dev
 ```
-Your blog should be up and running on [http://localhost:3000]
+Should be up and running on [http://localhost:3000]
 
 
-## Strapi Dockerfile
-
-https://hub.docker.com/r/strapi/strapi/dockerfile
-
-# Tailwind CSS
-
-This blog-starter uses [Tailwind CSS](https://tailwindcss.com). To control the generated stylesheet's filesize, this example uses Tailwind CSS' v2.0 [`purge` option](https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css) to remove unused CSS.
+## Includes
+- TailwindCSS
+- Typescript (Loose)
+- PostCSS Autoprefixer
 
 # TODO: 
 
+- Use Strict Typescript
+- Update usePlugin(form) on each blog post
 - Fix date | Shows wrong date when date picker updates
 - Manage About Us Page content in Strapi
