@@ -1,8 +1,14 @@
 import { parseISO, format } from 'date-fns'
 
-export default function DateFormatter ({ dateString }) {
+interface DateFormatterProps {
+  dateString: string
+}
+
+const DateFormatter: React.FC<DateFormatterProps> = ({ dateString }) => {
   const date = parseISO(dateString)
   // date.setDate(date.getDate() + 1)
   // TODO: Fix date | Shows wrong date after date picker updates
-  return <time dateTime={dateString}>{format(date, 'LLLL	d, yyyy')}</time>
+  return <time dateTime={dateString}>{format(date, 'LLL d, yyyy')}</time>
 }
+
+export default DateFormatter

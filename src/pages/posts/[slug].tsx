@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import ErrorPage from 'next/error'
+// import ErrorPage from 'next/error'
 import Container from '../../components/container'
 import PostBody from '../../components/post-body'
 import Header from '../../components/header'
@@ -9,12 +9,26 @@ import PostTitle from '../../components/post-title'
 import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 // TINA IMPORTS
-import { useCMS, useForm, usePlugin, useFormScreenPlugin, useScreenPlugin } from 'tinacms'
+import { useCMS, useForm, useFormScreenPlugin } from 'tinacms'
 import { DateFieldPlugin } from 'react-tinacms-date'
 // STRAPI
 import { fetchGraphql } from 'react-tinacms-strapi'
+import { GetStaticPaths, GetStaticProps } from 'next'
+import { ParsedUrlQuery } from 'querystring'
 
-export default function Post ({ post: initialPost, preview }) {
+interface PostProps {
+  post: {
+    id: string
+    title: string
+    coverImage: {
+      url: string
+    }
+  }
+  slug: string
+  preview: any
+}
+
+const Post: React.FC<PostProps> = ({ post: initialPost, preview }) => {
   const cms = useCMS()
   cms.plugins.add(DateFieldPlugin)
 
@@ -22,8 +36,7 @@ export default function Post ({ post: initialPost, preview }) {
     id: initialPost.id,
     label: 'Edit Blog Post',
     initialValues: initialPost,
-    onSubmit: async (values) => {
-      console.log(values)
+    onSubmit: async (values: any) => {
       const saveMutation = `
       mutation UpdatePost(
         $id: ID!
@@ -61,7 +74,7 @@ export default function Post ({ post: initialPost, preview }) {
         /* @ts-expect-error */
         coverImageId: cms.media.store.getFileId(values.coverImage.url)
       })
-      if (response.data) {
+      if (response.data != null) {
         cms.alerts.success('Changes Saved')
       } else {
         cms.alerts.error('Error saving changes')
@@ -84,11 +97,12 @@ export default function Post ({ post: initialPost, preview }) {
         label: 'Cover Image',
         component: 'image',
         // Generate value based on the filename
-        parse: media => `/uploads/${media.filename}`,
-
+        parse: (media: {filename: string}) => {
+          return `/uploads/${media.filename}`
+        },
         // Generate the src attribute for the preview image.
-        previewSrc: (src, path, formValues) => {
-          return process.env.STRAPI_URL + src
+        previewSrc: (src: string) => {
+          return `${String(process.env.STRAPI_URL)}${src}`
         }
       },
       {
@@ -109,7 +123,26 @@ export default function Post ({ post: initialPost, preview }) {
       }
     ]
   }
-  const [post, form] = useForm(formConfig)
+
+  interface UseFormProps {
+    slug: string
+    title: string
+    excerpt: string
+    date: string
+    author: {
+      name: string
+      picture: {
+        url: string
+      }
+    }
+    coverImage: {
+      url: string
+    }
+    content: string
+
+  }
+  const [post, form] = useForm<UseFormProps>(formConfig)
+
   // Create the form
   // const icon = () => <span>🦙</span>
   const layout = 'fullscreen'
@@ -118,9 +151,10 @@ export default function Post ({ post: initialPost, preview }) {
   // usePlugin(form)
 
   const router = useRouter()
-  if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />
-  }
+  // Had to comment this code due to this bug:  https://github.com/vercel/next.js/issues/12846
+  // if (!router.isFallback && !post?.slug) {
+  //   return <ErrorPage statusCode={404} />
+  // }
   return (
     <Layout preview={preview}>
       <Container>
@@ -134,7 +168,7 @@ export default function Post ({ post: initialPost, preview }) {
                 <title>
                   {post.title} | Next.js Blog Example with {CMS_NAME}
                 </title>
-                <meta property='og:image' content={process.env.STRAPI_URL + post.coverImage.url} />
+                <meta property='og:image' content={`${String(process.env.STRAPI_URL)}${post.coverImage.url}`} />
 
                 {/* <!-- Primary Meta Tags --> */}
                 <meta name='title' content={post.title} key='ogtitle' />
@@ -142,25 +176,24 @@ export default function Post ({ post: initialPost, preview }) {
 
                 {/* <!-- Open Graph / Facebook --> */}
                 <meta property='og:type' content='website' />
-                <meta property='og:url' content={process.env.NEXTJS_URL + '/' + post.slug} key='ogurl' />
-                <meta property='og:title' content={post.title} key='ogtitle' />
-                <meta property='og:description' content={post.excerpt} key='ogdesc' />
-                <meta property='og:image' content={process.env.STRAPI_URL + post.coverImage.url} key='ogimage' />
+                <meta property='og:url' content={`${String(process.env.NEXTJS_URL)}/${post.slug}`} key='ogurl' />
+                <meta property='og:title' content={`${post.title}`} key='ogtitle' />
+                <meta property='og:description' content={`${post.excerpt}`} key='ogdesc' />
+                <meta property='og:image' content={`${String(process.env.STRAPI_URL)}${post.coverImage.url}`} key='ogimage' />
 
                 {/* <!-- Twitter --> */}
                 <meta property='twitter:card' content='summary_large_image' key='twcard' />
-                <meta property='twitter:url' content={process.env.NEXTJS_URL + '/' + post.slug} key='twurl' />
-                <meta property='twitter:title' content={post.title} key='twtitle' />
-                <meta property='twitter:description' content={post.excerpt} key='twdesc' />
-                <meta property='twitter:image' content={process.env.STRAPI_URL + post.coverImage.url} key='twimg' />
+                <meta property='twitter:url' content={`${String(process.env.NEXTJS_URL)}/${post.slug}`} key='twurl' />
+                <meta property='twitter:title' content={`${post.title}`} key='twtitle' />
+                <meta property='twitter:description' content={`${post.excerpt}`} key='twdesc' />
+                <meta property='twitter:image' content={`${String(process.env.STRAPI_URL)}${post.coverImage.url}`} key='twimg' />
               </Head>
-              {/* @ts-expect-error */}
               <PostHeader
                 title={post.title}
-                coverImage={process.env.STRAPI_URL + post.coverImage.url}
+                coverImage={`${String(process.env.STRAPI_URL)}${post.coverImage.url}`}
                 date={post.date}
                 author={post.author}
-                preview={preview}
+                excerpt={post.excerpt}
               />
               <PostBody content={post.content} />
             </article>
@@ -170,13 +203,19 @@ export default function Post ({ post: initialPost, preview }) {
     </Layout>
   )
 }
+export default Post
 
-export async function getStaticProps ({ params, preview, previewData }) {
+interface IParams extends ParsedUrlQuery {
+  slug: string
+}
+
+export const getStaticProps: GetStaticProps = async ({ params, preview }) => {
+  const { slug } = params as IParams
   const postResults = await fetchGraphql(
-    process.env.STRAPI_URL,
+    `${String(process.env.STRAPI_URL)}`,
     `
     query{
-      posts(where: {slug: "${params.slug}"}){
+      posts(where: {slug: "${slug}"}){
         id
         title
         date
@@ -198,14 +237,14 @@ export async function getStaticProps ({ params, preview, previewData }) {
   )
   const post = postResults.data.posts[0]
 
-  if (preview) {
+  if (preview != null) {
     return {
       props: {
         post: {
           ...post
         },
-        preview,
-        ...previewData
+        preview
+        // ...previewData
       }
     }
   }
@@ -221,9 +260,9 @@ export async function getStaticProps ({ params, preview, previewData }) {
   }
 }
 
-export async function getStaticPaths () {
+export const getStaticPaths: GetStaticPaths = async () => {
   const postResults = await fetchGraphql(
-    process.env.STRAPI_URL,
+    `${String(process.env.STRAPI_URL)}`,
     `
     query{
       posts{
@@ -232,15 +271,14 @@ export async function getStaticPaths () {
     }
   `
   )
-
   return {
-    paths: postResults.data.posts.map((post) => {
+    fallback: 'blocking',
+    paths: postResults.data.posts.map((post: any) => {
       return {
         params: {
           slug: post.slug
         }
       }
-    }),
-    fallback: true
+    })
   }
 }

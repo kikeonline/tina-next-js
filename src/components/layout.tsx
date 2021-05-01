@@ -1,16 +1,21 @@
-import Alert from './alert'
 import Footer from './footer'
 import Meta from './meta'
 
-export default function Layout ({ preview, children }) {
+interface LayoutProps {
+  children: React.ReactElement
+  preview: any
+}
+
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Meta />
       <div className='min-h-screen'>
-        {/* <Alert preview={preview} /> */}
         <main>{children}</main>
       </div>
       <Footer />
     </>
   )
 }
+
+export default Layout

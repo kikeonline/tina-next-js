@@ -3,14 +3,21 @@ import DateFormatter from './date-formatter'
 import CoverImage from './cover-image'
 import Link from 'next/link'
 
-export default function HeroPost ({
-  title,
-  coverImage,
-  date,
-  excerpt,
-  author,
-  slug
-}) {
+interface HeroPostProps {
+  title: string
+  coverImage: string
+  date: string
+  excerpt: string
+  author: {
+    name: string
+    picture: {
+      url: string
+    }
+  }
+  slug: string
+}
+
+const HeroPost: React.FC<HeroPostProps> = ({ title, coverImage, date, excerpt, author, slug }) => {
   return (
     <section>
       <div className='mb-8 md:mb-16'>
@@ -37,10 +44,12 @@ export default function HeroPost ({
           <p className='mb-4 text-lg leading-relaxed'>{excerpt}</p>
           <Avatar
             name={author.name}
-            picture={process.env.STRAPI_URL + author.picture.url}
+            picture={`${String(process.env.STRAPI_URL)}${author.picture.url}`}
           />
         </div>
       </div>
     </section>
   )
 }
+
+export default HeroPost

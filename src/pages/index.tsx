@@ -7,8 +7,27 @@ import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'
 // STRAPI IMPORTS
 import { fetchGraphql } from 'react-tinacms-strapi'
+import { GetStaticProps } from 'next'
 
-export default function Index ({ allPosts }) {
+interface IndexProps {
+  allPosts: Array<{
+    title: string
+    date: string
+    author: {
+      name: string
+      picture: {
+        url: string
+      }
+    }
+    slug: string
+    excerpt: string
+    coverImage: {
+      url: string
+    }
+  }>
+}
+
+const Index: React.FC<IndexProps> = ({ allPosts }) => {
   const heroPost = allPosts[0]
   const morePosts = allPosts.slice(1)
   return (
@@ -20,10 +39,10 @@ export default function Index ({ allPosts }) {
         </Head>
         <Container>
           <Header />
-          {heroPost && (
+          {heroPost != null && (
             <HeroPost
               title={heroPost.title}
-              coverImage={process.env.STRAPI_URL + heroPost.coverImage.url}
+              coverImage={`${String(process.env.STRAPI_URL)}${heroPost.coverImage.url}`}
               date={heroPost.date}
               author={heroPost.author}
               slug={heroPost.slug}
@@ -36,10 +55,11 @@ export default function Index ({ allPosts }) {
     </>
   )
 }
+export default Index
 
-export async function getStaticProps ({ params, preview, previewData }) {
+export const getStaticProps: GetStaticProps = async ({ preview }) => {
   const postResults = await fetchGraphql(
-    process.env.STRAPI_URL,
+    `${String(process.env.STRAPI_URL)}`,
     `
     query{
       posts {
@@ -61,12 +81,11 @@ export async function getStaticProps ({ params, preview, previewData }) {
   `
   )
 
-  if (preview) {
+  if (preview != null) {
     return {
       props: {
         allPosts: postResults.data.posts,
-        preview,
-        ...previewData
+        preview
       }
     }
   }

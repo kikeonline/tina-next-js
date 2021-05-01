@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default function Header () {
+const Header: React.FC = () => {
   return (
     <section className='flex flex-row justify-between items-center md:flex-row mt-16 mb-16 md:mb-12'>
       <h1 className='text-4xl md:text-6xl font-bold tracking-tighter leading-tight md:pr-8'>
@@ -17,3 +17,5 @@ export default function Header () {
     </section>
   )
 }
+
+export default Header

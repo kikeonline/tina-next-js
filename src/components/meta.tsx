@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import { CMS_NAME, HOME_OG_IMAGE_URL } from '../lib/constants'
+import { CMS_NAME } from '../lib/constants'
 
-export default function Meta () {
+const Meta: React.FC = () => {
   return (
     <Head>
       <link
@@ -36,7 +36,8 @@ export default function Meta () {
         name='description'
         content={`Blog App with Preview Mode using Next.js and ${CMS_NAME}.`}
       />
-      <meta property='og:image' content={HOME_OG_IMAGE_URL} />
     </Head>
   )
 }
+
+export default Meta

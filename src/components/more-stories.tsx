@@ -1,6 +1,24 @@
 import PostPreview from './post-preview'
 
-export default function MoreStories ({ posts }) {
+interface MoreStoriesProps {
+  posts: Array<{
+    slug: string
+    title: string
+    coverImage: {
+      url: string
+    }
+    date: string
+    author: {
+      name: string
+      picture: {
+        url: string
+      }
+    }
+    excerpt: string
+  }>
+}
+
+const MoreStories: React.FC<MoreStoriesProps> = ({ posts }) => {
   return (
     <section>
       <h2 className='mb-8 text-6xl font-bold leading-tight tracking-tighter md:text-7xl'>
@@ -11,7 +29,7 @@ export default function MoreStories ({ posts }) {
           <PostPreview
             key={post.slug}
             title={post.title}
-            coverImage={process.env.STRAPI_URL + post.coverImage.url}
+            coverImage={`${String(process.env.STRAPI_URL)}${post.coverImage.url}`}
             date={post.date}
             author={post.author}
             slug={post.slug}
@@ -22,3 +40,5 @@ export default function MoreStories ({ posts }) {
     </section>
   )
 }
+
+export default MoreStories

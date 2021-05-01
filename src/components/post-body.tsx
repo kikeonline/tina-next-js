@@ -1,7 +1,11 @@
 import ReactMarkdown from 'react-markdown'
-import markdownStyles from './markdown-styles.module.css'
+import markdownStyles from 'src/components/markdown-styles.module.css'
 
-export default function PostBody ({ content }) {
+interface PostBodyProps {
+  content: string
+}
+
+const PostBody: React.FC<PostBodyProps> = ({ content }) => {
   return (
     <div className='max-w-2xl mx-auto'>
       <div className={markdownStyles.markdown}>
@@ -10,3 +14,5 @@ export default function PostBody ({ content }) {
     </div>
   )
 }
+
+export default PostBody

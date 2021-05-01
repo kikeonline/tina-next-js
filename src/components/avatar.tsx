@@ -1,4 +1,9 @@
-export default function Avatar ({ name, picture }) {
+interface AvatarProps {
+  name: string
+  picture: string
+}
+
+const Avatar: React.FC<AvatarProps> = ({ name, picture }) => {
   return (
     <div className='flex items-center'>
       <img
@@ -11,3 +16,5 @@ export default function Avatar ({ name, picture }) {
     </div>
   )
 }
+
+export default Avatar

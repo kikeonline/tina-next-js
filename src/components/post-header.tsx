@@ -5,7 +5,20 @@ import CoverImage from '../components/cover-image'
 // TINA
 import { useCMS } from 'tinacms'
 
-export default function PostHeader ({ title, coverImage, date, author, excerpt, preview }) {
+interface PostHeaderProps {
+  title: string
+  coverImage: string
+  date: string
+  author: {
+    name: string
+    picture: {
+      url: string
+    }
+  }
+  excerpt: string
+}
+
+const PostHeader: React.FC<PostHeaderProps> = ({ title, coverImage, date, author, excerpt }) => {
   useCMS()
   return (
     <>
@@ -17,7 +30,7 @@ export default function PostHeader ({ title, coverImage, date, author, excerpt, 
       </div>
       <div className='hidden  md:block md:mb-12'>
         <Avatar
-          name={author.name} picture={process.env.STRAPI_URL + author.picture.url}
+          name={author.name} picture={`${String(process.env.STRAPI_URL)} + ${author.picture.url}`}
         />
       </div>
       <div className='mb-8 md:mb-16 sm:mx-0'>
@@ -30,7 +43,7 @@ export default function PostHeader ({ title, coverImage, date, author, excerpt, 
         <div className='block mb-6 md:hidden'>
           <Avatar
             name={author.name}
-            picture={process.env.STRAPI_URL + author.picture.url}
+            picture={`${String(process.env.STRAPI_URL)}${author.picture.url}`}
           />
         </div>
         <div className='mb-6 text-lg'>
@@ -40,3 +53,5 @@ export default function PostHeader ({ title, coverImage, date, author, excerpt, 
     </>
   )
 }
+
+export default PostHeader

@@ -9,19 +9,26 @@ import { MarkdownFieldPlugin } from 'react-tinacms-editor'
 import { useCMS } from '@tinacms/react-core'
 import { TinaCMS, TinaProvider } from 'tinacms'
 
-const enterEditMode = async () => {
+// TYPESCRIPT
+import type { AppProps /*, AppContext */ } from 'next/app'
+
+const enterEditMode = async (): Promise<void> => {
   return await fetch('/api/preview').then(() => {
     window.location.href = window.location.pathname
   })
 }
 
-const exitEditMode = async () => {
+const exitEditMode = async (): Promise<void> => {
   return await fetch('/api/reset-preview').then(() => {
     window.location.reload()
   })
 }
 
-export const EditButton = ({ preview }) => {
+interface EditButtonProps {
+  preview: boolean
+}
+
+export const EditButton: React.FC<EditButtonProps> = ({ preview }) => {
   const cms = useCMS()
   return (
     <div
@@ -47,7 +54,7 @@ export const EditButton = ({ preview }) => {
   )
 }
 
-export default function MyApp ({ Component, pageProps }) {
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   const cms = useMemo(
     () =>
       new TinaCMS({
@@ -56,9 +63,9 @@ export default function MyApp ({ Component, pageProps }) {
         sidebar: pageProps.preview,
         plugins: [MarkdownFieldPlugin],
         apis: {
-          strapi: new StrapiClient(process.env.STRAPI_URL)
+          strapi: new StrapiClient(`${String(process.env.STRAPI_URL)}`)
         },
-        media: new StrapiMediaStore(process.env.STRAPI_URL)
+        media: new StrapiMediaStore(`${String(process.env.STRAPI_URL)}`)
       }),
     []
   )
@@ -71,3 +78,5 @@ export default function MyApp ({ Component, pageProps }) {
     </TinaProvider>
   )
 }
+
+export default MyApp

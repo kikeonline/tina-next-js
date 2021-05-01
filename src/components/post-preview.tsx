@@ -3,14 +3,21 @@ import DateFormatter from './date-formatter'
 import CoverImage from './cover-image'
 import Link from 'next/link'
 
-export default function PostPreview ({
-  title,
-  coverImage,
-  date,
-  excerpt,
-  author,
-  slug
-}) {
+interface PostPreviewProps {
+  title: string
+  coverImage: string
+  date: string
+  excerpt: string
+  author: {
+    name: string
+    picture: {
+      url: string
+    }
+  }
+  slug: string
+}
+
+const PostPreview: React.FC<PostPreviewProps> = ({ title, coverImage, date, excerpt, author, slug }) => {
   return (
     <div>
       <div className='mb-5'>
@@ -33,8 +40,10 @@ export default function PostPreview ({
       <p className='mb-4 text-lg leading-relaxed'>{excerpt}</p>
       <Avatar
         name={author.name}
-        picture={process.env.STRAPI_URL + author.picture.url}
+        picture={`${String(process.env.STRAPI_URL)}${author.picture.url}`}
       />
     </div>
   )
 }
+
+export default PostPreview

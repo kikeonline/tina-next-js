@@ -2,7 +2,11 @@ import Container from './container'
 import cn from 'classnames'
 import { EXAMPLE_PATH } from '../lib/constants'
 
-export default function Alert ({ preview }) {
+interface AlertProps {
+  preview: boolean
+}
+
+const Alert: React.FC<AlertProps> = ({ preview }) => {
   return (
     <div
       className={cn('border-b', {
@@ -40,3 +44,5 @@ export default function Alert ({ preview }) {
     </div>
   )
 }
+
+export default Alert
