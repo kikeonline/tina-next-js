@@ -1,11 +1,11 @@
 name: Lint
 on: [push]
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Install modules
         run: yarn
-      - name: Run ESLint
+      - name: Run TS-Standard Lint
         run: yarn lint
