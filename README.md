@@ -3,6 +3,17 @@
 
 # Next.js + TinaCMS + StrapiCMS
 
+## Features
+- 🔥 Next.js
+- 🦙 Tina CMS
+- 🗄 Strapi CMS
+- 📚 Storybook JS
+- 🎨 Tailwind CSS
+- 🎉 Typescript (Strict)
+- 🤖 SEO metadata and Open Graph tags
+- 🛠 Prettier
+- 💅🏼 PostCSS Autoprefixer
+
 ## How to use
 
 Install dependencies and run the example:
@@ -11,24 +22,25 @@ Install dependencies and run the example:
 yarn install
 yarn dev
 ```
-Should be up and running on [http://localhost:3000]
+Setup envirment variables:
+
+| KEY | TYPE | DESCRIPTION | REQUIRED | DEFAULT
+| ------ | ------ | ------ | ------------- | ----
+| STRAPI_URL  | string | URL of deployed Strapi CMS | true | 
+| NEXTJS_URL  | string | host or domain | true |
 
 
-## Includes
-- TailwindCSS
-- Typescript (Strict)
-- PostCSS Autoprefixer
+## TODO: 
 
-# TODO: 
-
-- Fix linting
 - Add github actions for linting and build
 - Update usePlugin(form) on each blog post
 - Fix date | Shows wrong date when date picker updates
 - Manage About Us Page content in Strapi
 
 
-### Tutorials used to build this boilerplate
+## Tutorials used to build this boilerplate
 - https://medium.com/@gogl.alex/how-to-set-up-typescript-eslint-prettier-for-next-gatsby-c5330b4a9b7a
 - https://eslint.org/docs/user-guide/command-line-interface
 - https://dev.to/risafj/how-to-set-up-eslint-with-standardjs-for-a-new-react-native-typescript-project-ebl
+- https://nebulab.com/blog/nextjs-tailwind-storybook
+- https://github.com/tailwindlabs/tailwindcss/discussions/2929
