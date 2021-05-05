@@ -24,12 +24,12 @@ Install dependencies and run the example:
 yarn install
 yarn dev
 ```
-Setup envirment variables:
+Setup enviorment variables:
 
-| KEY | TYPE | DESCRIPTION | REQUIRED | DEFAULT
-| ------ | ------ | ------ | ------------- | ----
-| STRAPI_URL  | string | URL of deployed Strapi CMS | true | 
-| NEXTJS_URL  | string | host or domain | true |
+| KEY | TYPE | DESCRIPTION | REQUIRED 
+| ------ | ------ | ------ | ------------- 
+| STRAPI_URL  | string | URL of deployed Strapi CMS | true 
+| NEXTJS_URL  | string | host or domain | true 
 
 
 ## TODO: 
