@@ -40,7 +40,8 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': [
       'error',
       { functions: false, classes: false, variables: true }
-    ]
+    ],
+    '@typescript-eslint/consistent-type-assertions': ['error', { assertionStyle: 'never' }]
   },
   settings: {
     'import/resolver': {

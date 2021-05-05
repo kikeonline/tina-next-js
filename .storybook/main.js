@@ -8,6 +8,15 @@ module.exports = {
     "@storybook/addon-essentials",
     '@storybook/addon-postcss'
   ],
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      compilerOptions: {
+        allowSyntheticDefaultImports: false,
+        esModuleInterop: false,
+      },
+    }
+  },
   webpackFinal: async (config) => {
     config.module.rules.push({
       test: /\.scss$/,

@@ -5,11 +5,17 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint": "yarn run ts-standard -p tsconfig.eslint.json \"src/**/*.tsx\" \"src/**/*.ts\" && next build",
+    "lint": "yarn run ts-standard -p tsconfig.json \"src/**/*.tsx\" \"src/**/*.ts\"",
+    "lint:build": "yarn run ts-standard -p tsconfig.json \"src/**/*.tsx\" \"src/**/*.ts\" && next build",
     "lint:fix": "yarn ts-standard --fix \"src/**/*.tsx\" \"src/**/*.ts\"",
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook",
     "chromatic": "npx chromatic --project-token 9bba92751f55"
+  },
+  "ts-standard": {
+    "project": "tsconfig.eslint.json",
+    "report": "stylish",
+    "ignore": "*.stories.tsx"
   },
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
