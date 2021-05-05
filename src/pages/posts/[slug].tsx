@@ -145,7 +145,7 @@ const Post: React.FC<PostProps> = ({ post: initialPost, preview }) => {
 
   // Create the form
   // const icon = () => <span>🦙</span>
-  const layout = 'fullscreen'
+  const layout = 'popup'
   // Register Plugin
   useFormScreenPlugin(form, null, layout)
   // usePlugin(form)

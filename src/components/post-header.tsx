@@ -30,7 +30,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ title, coverImage, date, author
       </div>
       <div className='hidden  md:block md:mb-12'>
         <Avatar
-          name={author.name} picture={`${String(process.env.STRAPI_URL)} + ${author.picture.url}`}
+          name={author.name} picture={`${String(process.env.STRAPI_URL)}${author.picture.url}`}
         />
       </div>
       <div className='mb-8 md:mb-16 sm:mx-0'>
