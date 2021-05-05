@@ -8,7 +8,7 @@
 - 🦙 Tina CMS
 - 🗄 Strapi CMS
 - 📚 Storybook JS
-- 🎨 Tailwind CSS
+- 🎨 Tailwind CSS & SASS
 - 🎉 Typescript (Strict)
 - 🤖 SEO metadata and Open Graph tags
 - 🛠 Prettier
