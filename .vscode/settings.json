@@ -18,5 +18,6 @@
     "**/.env.test.local": false,
     "**/.env.production.local": false,
     "**/.vercel": true
-  }
+  },
+  "css.customData": [".vscode/css_custom_data.json"]
 }
