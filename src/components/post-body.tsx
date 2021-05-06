@@ -1,5 +1,5 @@
 import ReactMarkdown from 'react-markdown'
-import markdownStyles from 'src/components/markdown-styles.module.css'
+import markdownStyles from './markdown-styles.module.css'
 
 interface PostBodyProps {
   content: string

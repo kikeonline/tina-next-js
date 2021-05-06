@@ -32,8 +32,7 @@ const Index: React.FC<IndexProps> = ({ allPosts }) => {
   const morePosts = allPosts.slice(1)
   return (
     <>
-      {/* @ts-expect-error */}
-      <Layout>
+      <Layout preview={false}>
         <Head>
           <title>Next.js Blog Example with {CMS_NAME}</title>
         </Head>

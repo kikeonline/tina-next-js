@@ -1,5 +1,6 @@
 .markdown {
-  @apply text-lg leading-relaxed;
+  @apply text-lg;
+  @apply leading-relaxed;
 }
 
 .markdown p,
@@ -10,9 +11,15 @@
 }
 
 .markdown h2 {
-  @apply text-3xl mt-12 mb-4 leading-snug;
+  @apply text-3xl;
+  @apply mt-12;
+  @apply mb-4;
+  @apply leading-snug;
 }
 
 .markdown h3 {
-  @apply text-2xl mt-8 mb-4 leading-snug;
+  @apply text-2xl;
+  @apply mt-8; 
+  @apply mb-4; 
+  @apply leading-snug;
 }

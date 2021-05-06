@@ -7,6 +7,7 @@ import { useCMS } from 'tinacms'
 
 interface PostHeaderProps {
   title: string
+  slug: string
   coverImage: string
   date: string
   author: {
@@ -18,7 +19,7 @@ interface PostHeaderProps {
   excerpt: string
 }
 
-const PostHeader: React.FC<PostHeaderProps> = ({ title, coverImage, date, author, excerpt }) => {
+const PostHeader: React.FC<PostHeaderProps> = ({ title, slug, coverImage, date, author, excerpt }) => {
   useCMS()
   return (
     <>
@@ -34,10 +35,7 @@ const PostHeader: React.FC<PostHeaderProps> = ({ title, coverImage, date, author
         />
       </div>
       <div className='mb-8 md:mb-16 sm:mx-0'>
-        {
-          /* @ts-expect-error */
-          <CoverImage title={title} src={coverImage} height={620} width={1240} />
-        }
+        <CoverImage title={title} src={coverImage} slug={slug} height={620} width={1240} />
       </div>
       <div className='max-w-2xl mx-auto'>
         <div className='block mb-6 md:hidden'>

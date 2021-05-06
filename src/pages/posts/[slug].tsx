@@ -71,7 +71,7 @@ const Post: React.FC<PostProps> = ({ post: initialPost, preview }) => {
         date: fixedDate,
         content: values.content,
         excerpt: values.excerpt,
-        /* @ts-expect-error */
+        /* @ts-expect-error: Unreachable code error, ESLINT not recognizing getField method form Tina */
         coverImageId: cms.media.store.getFileId(values.coverImage.url)
       })
       if (response.data != null) {
@@ -190,6 +190,7 @@ const Post: React.FC<PostProps> = ({ post: initialPost, preview }) => {
               </Head>
               <PostHeader
                 title={post.title}
+                slug={post.slug}
                 coverImage={`${String(process.env.STRAPI_URL)}${post.coverImage.url}`}
                 date={post.date}
                 author={post.author}
