@@ -1,4 +1,5 @@
 // Import the global style enabling tailwind classes
+// Hierarchy https://github.com/storybookjs/storybook/issues/6327
 import '../src/styles/global.css'
 
 export const parameters = {
@@ -7,6 +8,15 @@ export const parameters = {
     matchers: {
       color: /(background|color)$/i,
       date: /Date$/,
+    },
+  },
+  options: {
+    storySort: {
+      order: [
+        'StyleGuide', ['Introduction', 'Colors', 'Typography'],
+        'Components', ['Footer']
+    
+    ],
     },
   },
 }

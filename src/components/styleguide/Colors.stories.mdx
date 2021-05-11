@@ -1,0 +1,42 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs/blocks';
+import { theme } from '../../../tailwind.config.js';
+
+<Meta title="StyleGuide/Colors" />
+
+# Brand Primaries
+
+<ColorPalette>
+  <ColorItem title="theme.colors.orange" subtitle="Coral" colors={[theme.extend.colors['accent-1']]} />
+</ColorPalette>
+
+# Brand Secondaries
+
+<ColorPalette>
+  <ColorItem title="theme.colors.orange" subtitle="Coral" colors={[theme.extend.colors['accent-2']]} />
+</ColorPalette>
+
+# Neutrals
+
+-  theme.extend.colors: #3F4041
+
+<ColorPalette>
+  <ColorItem
+    title="Neutrals"
+    colors={[
+      [theme.extend.colors['accent-7']]
+    ]}
+  />
+</ColorPalette>
+
+# User Validation
+
+-  theme.extend.colors.success: #3F4041
+
+<ColorPalette>
+  <ColorItem
+    title="User Validation"
+    colors={[
+      theme.extend.colors.success,
+    ]}
+  />
+</ColorPalette>

@@ -1,7 +1,9 @@
 module.exports = {
   "stories": [
-    "../src/**/*.stories.mdx",
-    "../src/**/*.stories.@(js|jsx|ts|tsx)"
+    "../src/components/styleguide/*.stories.mdx",
+    "../src/components/styleguide/*.stories.@(js|jsx|ts|tsx)",
+    "../src/components/*.stories.mdx",
+    "../src/components/*.stories.@(js|jsx|ts|tsx)"
   ],
   "addons": [
     "@storybook/addon-links",
@@ -16,19 +18,6 @@ module.exports = {
         esModuleInterop: false,
       },
     }
-  },
-  webpackFinal: async (config) => {
-    config.module.rules.push({
-      test: /\.scss$/,
-      use: [
-        "style-loader",
-        "css-loader",
-        "postcss-loader",
-        "sass-loader",
-      ],
-    })
-
-    return config
   },
   reactOptions: {
     fastRefresh: true,

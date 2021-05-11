@@ -1,0 +1,70 @@
+import { Meta, Typeset } from '@storybook/addon-docs/blocks';
+import { theme } from '../../../tailwind.config.js';
+import { typography } from './shared/styles';
+import { Canvas } from '@storybook/addon-docs/blocks';
+
+<Meta title="StyleGuide/Typography" />
+
+# Typography
+
+**Font:** Montserrat
+
+**Weights:** 100(thin), 300(light), 500(medium), 700(bold), 900(black)
+
+<Typeset 
+  fontFamily="Montserrat"
+  fontSizes={[
+    Number(typography.size.s1),
+    Number(typography.size.s2),
+    Number(typography.size.s3),
+    Number(typography.size.m1),
+    Number(typography.size.m2),
+    Number(typography.size.m3),
+    Number(typography.size.l1),
+    Number(typography.size.l2),
+    Number(typography.size.l3)
+  ]}
+  fontWeight={typography.weight.regular}
+/>
+
+**Font:** Bitter
+
+**Weights:** 100(thin), 300(light), 500(medium), 700(bold), 900(black)
+
+<Typeset 
+  fontFamily="Bitter"
+  fontSizes={[
+    Number(typography.size.s1),
+    Number(typography.size.s2),
+    Number(typography.size.s3),
+    Number(typography.size.m1),
+    Number(typography.size.m2),
+    Number(typography.size.m3),
+    Number(typography.size.l1),
+    Number(typography.size.l2),
+    Number(typography.size.l3)
+  ]}
+  fontWeight={typography.weight.regular}
+/>
+
+## Headings
+
+<Canvas>
+  <div className='flex-row'>
+    <h1>This is a header h1</h1>
+    <h2>This is a header h2</h2>
+    <h3>This is a header h3</h3>
+    <h4>This is a header h4</h4>
+    <h5>This is a header h5</h5>
+  </div>
+</Canvas>
+
+## Body Paragraphs
+
+<Canvas>
+  <div className='flex-row'>
+    <h1>This is a header h1</h1>
+    <p>Lorem ipsum dolor sit amet, ne his quem modus nominavi, suas nihil ponderum eam et, ridens civibus iracundia ne duo. Esse delicata ut qui. Ex esse vulputate voluptatibus eum, pri feugait definiebas ea. Tollit habemus qualisque in cum, sed an laudem delicata vulputate, id ceteros menandri sea. Mei molestie delectus constituam id, nulla causae offendit ea pri. Porro impetus reprimique no est.</p>
+    <p>Lorem ipsum dolor sit amet, ne his quem modus nominavi, suas nihil ponderum eam et, ridens civibus iracundia ne duo. Esse delicata ut qui. Ex esse vulputate voluptatibus eum, pri feugait definiebas ea. Tollit habemus qualisque in cum, sed an laudem delicata vulputate, id ceteros menandri sea. Mei molestie delectus constituam id, nulla causae offendit ea pri. Porro impetus reprimique no est.</p>
+  </div>
+</Canvas>
