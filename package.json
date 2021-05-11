@@ -25,13 +25,11 @@
     }
   },
   "dependencies": {
-    "@zeit/next-sass": "^1.0.1",
     "classnames": "^2.3.1",
     "date-fns": "2.16.1",
     "dotenv": "^8.2.0",
     "gray-matter": "4.0.2",
     "next": "latest",
-    "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-markdown": "^6.0.0",
@@ -41,7 +39,6 @@
     "react-tinacms-strapi": "^0.39.0",
     "remark": "13.0.0",
     "remark-html": "13.0.1",
-    "sass": "^1.32.12",
     "styled-components": "^5.2.3",
     "tinacms": "^0.39.0"
   },
@@ -71,7 +68,6 @@
     "identity-obj-proxy": "^3.0.0",
     "postcss": "^7",
     "prettier": "^2.2.1",
-    "sass-loader": "^10.1.1",
     "style-loader": "^2.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "typescript": "^4.2.4"

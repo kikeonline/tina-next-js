@@ -1,0 +1,58 @@
+@tailwind base;
+
+/* Write your own custom base styles here */
+
+@tailwind components;
+
+/* Write you own custom component styles here */
+
+@tailwind utilities;
+
+/* Your own custom utilities */
+
+@layer base {
+  h1,
+  h2,
+  h4,
+  h5 {
+    @apply subpixel-antialiased leading-loose;
+  }
+  h3 {
+    @apply subpixel-antialiased leading-loose;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  h4 {
+    @apply uppercase;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  
+  h5 {
+    font-size: 1.125rem;
+    font-weight: lighter;
+  }
+
+  p{
+    @apply antialiased leading-relaxed mb-8;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 26px;
+  }
+}

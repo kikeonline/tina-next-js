@@ -13,7 +13,7 @@
 - 🛂 Strict TypeScript
 - ⚛️ GraphQL
 - 📚 Storybook JS
-- 🎨 Tailwind CSS & SASS
+- 🎨 Tailwind CSS
 - 💅🏼 PostCSS Autoprefixer
 - 🚨 ESLint & Type-Check
 - 🐶 Husky

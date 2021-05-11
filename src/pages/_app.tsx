@@ -1,4 +1,4 @@
-import '../styles/global.scss'
+import '../styles/global.css'
 import Container from '../components/container'
 import cn from 'classnames'
 import { useMemo } from 'react'
