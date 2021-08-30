@@ -2,7 +2,6 @@
 ![TypeScript](https://badges.frapsoft.com/typescript/version/typescript-next.svg?v=101)
 ![Strict TypeScript Checked](https://badgen.net/badge/TS/Strict)
 [![Lint](https://github.com/kikeonline/tina-next-js/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/kikeonline/tina-next-js/actions/workflows/lint.yml)
-[![Build](https://github.com/kikeonline/tina-next-js/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/kikeonline/tina-next-js/actions/workflows/build.yml)
 
 # Next.js + TinaCMS + StrapiCMS
 
