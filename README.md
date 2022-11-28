@@ -44,7 +44,7 @@ Setup enviorment variables:
 - Manage About Us Page content in Strapi for example purposes
 
 
-## Dcumentation used to build this boilerplate
+## Documentation used to build this boilerplate
 - https://tina.io/guides/#nextjs
 - https://medium.com/@gogl.alex/how-to-set-up-typescript-eslint-prettier-for-next-gatsby-c5330b4a9b7a
 - https://eslint.org/docs/user-guide/command-line-interface
